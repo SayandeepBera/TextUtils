@@ -1,3 +1,30 @@
 .accordion-button::after {
   filter: invert(1);
 }
+
+/* Navbar.css */
+ /* for desktop */
+@media (min-width: 768px) { 
+    .nav-link {
+        position: relative;
+        text-decoration: none;
+    }
+    
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background-color: red;
+        transition: width 0.5s ease;
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        width: 100%;
+    }
+}
+
+  

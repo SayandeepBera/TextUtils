@@ -1,57 +1,68 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import PropTypes from 'prop-types';
 
 // export default function Navbar({ title = 'Set the title', aboutText = 'About'}) {
 export default function Navbar(props) {
-  // const myStyle={
-  //   height: "50px",
-  //   width: "10%",
-  //   borderRadius: "50%"
-  // }
-
-  // const multiMode=(color)=>{
-  //   document.body.style.background=color;
-  // }
+  const location = useLocation(); // to highlight the active link
 
   return (
-    <div>
+    <div className="fixed-top">
       <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">{props.title}</Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <Link className="navbar-brand ms-3 me-5" to="/" style={{fontSize : "35px", fontFamily : "fangsong"}}><i>📝{props.title}</i></Link>
+          
+          {/* Offcanvas Toggle Button */}
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar"
+            aria-label="Toggle navigation"
+          >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/about">{props.aboutText}</Link>
-              </li>
-            </ul>
-          </div>
           
-        </div>
-        
-        {/* <button type="button" className="btn btn-warning me-4" style={myStyle} onClick={()=>multiMode("#ffc107")}>Enable</button>
-        <button type="button" className="btn btn-success me-4" style={myStyle} onClick={()=>multiMode("#5ee816")}>Enable</button>
-        <button type="button" className="btn btn-info me-4" style={myStyle} onClick={()=>multiMode("#0bc7ee")}>Enable</button>
-        <button type="button" className="btn btn-light" style={myStyle} onClick={()=>{multiMode("white")}}>Default</button> */}
+          {/* Offcanvas Menu */}
+          <div
+            className={`offcanvas offcanvas-end text-bg-${props.mode} w-75`}
+            tabIndex="-1"
+            id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel"
+          >
 
-        <div className="d-flex">
-          <div className="bg-primary rounded mx-2" onClick={()=>{props.toggle("primary")}} style={{height: "35px",width: "35px",cursor: "pointer"}}></div>
-          <div className="bg-danger rounded mx-2" onClick={()=>{props.toggle("danger")}} style={{height: "35px",width: "35px",cursor: "pointer"}}></div>
-          <div className="bg-success rounded mx-2" onClick={()=>{props.toggle("success")}} style={{height: "35px",width: "35px",cursor: "pointer"}}></div>
-          <div className="bg-warning rounded mx-2" onClick={()=>{props.toggle("warning")}} style={{height: "35px",width: "35px",cursor: "pointer"}}></div>
-          <div className="bg-light rounded mx-2" onClick={()=>{props.toggle("light")}} style={{height: "35px",width: "35px",cursor: "pointer"}}></div>
-        </div>
+            <div className="offcanvas-header">
+              <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+              <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
 
-        <div className={`form-check form-switch text-${props.mode === 'secondary' ? 'dark' : 'light'}`}>
-              <input className="form-check-input" onClick={()=>{props.toggle(null)}} type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
-              <label className="form-check-label" htmlFor="flexSwitchCheckDefault">{props.text}</label>
+            <div className="offcanvas-body">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                {[
+                  {name: "Home", path: "/"},
+                  {name: props.aboutText , path: "/about"}
+                ].map((item)=>(
+                  <li className='nav-item me-4 fw-semibold' key={item.name} style={{fontSize: "18px"}}>
+                    <Link
+                      className={`nav-link ${location.pathname === item.path ? "active" : ""}`}
+                      to={item.path}
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Dark Mode Toggle (Shown inside offcanvas on mobile) */}
+              <div className={`form-check form-switch text-${props.mode === 'info' ? 'dark' : 'light'} me-3 ms-3 my-2 fw-semibold`}>
+                <input className="form-check-input" onClick={()=>{props.toggle(null)}} type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
+                <label className="form-check-label" htmlFor="flexSwitchCheckDefault" style={{fontSize: "18px"}}>{props.text}</label>
+              </div>
+              
+            </div>
+          </div>
         </div>
       </nav>
     </div>
@@ -62,5 +73,8 @@ export default function Navbar(props) {
 Navbar.propTypes = {
   title: PropTypes.string.isRequired,  // Should be a string
   aboutText: PropTypes.string.isRequired,  // Should be a string
+  toggle: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired, // Should be a string
+  mode: PropTypes.string.isRequired, // Should be a string
 };
 

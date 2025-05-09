@@ -1,49 +1,37 @@
-// import React,{useState} from 'react'
 
 export default function About(props) {
-    // const [myStyle,setmyStyle]=useState({
-    //     color: "black",
-    //     backgroundColor: "white",
-    //     borderRadius: "10px",
-    //     border: "0.5px solid grey"
-    // });
-
-    // const [btnText,setBtnText]=useState("Enable Dark Mode");
-
-    // let handleDarkModeOn=()=>{
-    //     if(myStyle.color === "black"){
-    //         setmyStyle({
-    //             color: "white",
-    //             backgroundColor: "#6b6565",
-    //             borderRadius: "10px",
-    //         });
-
-    //         setBtnText("Enable Light Mode");
-    //     }else{
-    //         setmyStyle({
-    //             color: "black",
-    //             backgroundColor: "white",
-    //             borderRadius: "10px",
-    //             border: "0.5px solid grey"
-    //         });
-
-    //         setBtnText("Enable Dark Mode");
-    //     }
-    // }
-
     const myStyle={
         color: props.mode === 'dark'? 'white' : '#042743',
         backgroundColor: props.mode === 'dark'? 'rgb(36 74 104)' : 'white',
         borderRadius: "10px"
     }
+
   return (
-    <div className="container" style={{color: props.mode === 'dark'? 'white' : '#042743',backgroundColor: props.mode === 'dark'? '#3c5468' : 'white',borderRadius: "10px"}}>
-        <h2>About Us</h2>
-        <div className="accordion" id="accordionExample">
-            <div className="accordion-item" style={myStyle}>
+    <div className="container" style={{color: props.mode === 'dark'? 'white' : '#042743',backgroundColor: props.mode === 'dark'? '#3c5468' : 'white',borderRadius: "10px", padding : "15px"}}>
+        <h2 className="text-center mb-3">About TextUtils</h2>
+        <p style={{fontSize : "18px"}}><strong>TextUtils</strong> is a user-friendly text conversion application developed using React. 
+            It offers a variety of powerful and practical text manipulation features, making 
+            it a handy tool for everyday text formatting tasks. Users can easily:
+            <ul style={{listStyle : "none"}}>
+                <li>💫 Convert text to <strong>uppercase</strong> or <strong>lowercase</strong></li>
+                <li>💫 <strong>Capitalize</strong> the first letter of each word</li>
+                <li>💫 <strong>Copy</strong> the formatted text to the clipboard</li>
+                <li>💫 <strong>Remove extra spaces</strong> for cleaner formatting</li>
+                <li>💫 <strong>Clear</strong> the entire text input with a single click</li>
+            </ul>
+
+            Additionally, <strong>TextUtils</strong> includes a responsive <strong>light and dark mode toggle</strong>, 
+            allowing users to switch between themes for better readability and comfort 
+            based on their environment.
+        </p>
+        
+        {/* Frequently Asked Questions (FAQs) about TextUtils */}
+        <div className="accordion my-5 mb-3" id="accordionExample">
+            <h3 className="mb-3">Frequently Asked Questions (FAQs) about TextUtils</h3>
+            <div className="accordion-item">
                 <h2 className="accordion-header">
-                    <button className="accordion-button" style={myStyle} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <strong>Analyze your text</strong>
+                    <button className="accordion-button" style={{...myStyle, fontSize: "18px"}} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <strong>1. Analyze your text</strong>
                     </button>
                 </h2>
                 <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
@@ -52,10 +40,10 @@ export default function About(props) {
                     </div>
                 </div>
             </div>
-            <div className="accordion-item" style={myStyle}>
+            <div className="accordion-item">
                 <h2 className="accordion-header">
-                    <button className="accordion-button collapsed" style={myStyle} type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        <strong>Free to use</strong>
+                    <button className="accordion-button collapsed" style={{...myStyle, fontSize: "18px"}} type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <strong>2. Free to use</strong>
                     </button>
                 </h2>
                 <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -67,10 +55,10 @@ export default function About(props) {
                     </div>
                 </div>
             </div>
-            <div className="accordion-item" style={myStyle}>
+            <div className="accordion-item">
                 <h2 className="accordion-header">
-                    <button className="accordion-button collapsed" style={myStyle} type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        <strong>Browser compatible</strong>
+                    <button className="accordion-button collapsed" style={{...myStyle, fontSize: "18px"}} type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <strong>3. Browser compatible</strong>
                     </button>
                 </h2>
                 <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
