@@ -57,10 +57,17 @@ export default function Navbar(props) {
 
               {/* Dark Mode Toggle (Shown inside offcanvas on mobile) */}
               <div className={`form-check form-switch text-${props.mode === 'info' ? 'dark' : 'light'} me-3 ms-3 my-2 fw-semibold`}>
-                <input className="form-check-input" onClick={()=>{props.toggle(null)}} type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
+                <input className="form-check-input" 
+                  onChange={() => {
+                    props.toggle(null);
+                    document.querySelector('[data-bs-dismiss="offcanvas"]')?.click();
+                  }}
+                  type="checkbox" 
+                  role="switch" 
+                  id="flexSwitchCheckDefault"
+                />
                 <label className="form-check-label" htmlFor="flexSwitchCheckDefault" style={{fontSize: "18px"}}>{props.text}</label>
               </div>
-              
             </div>
           </div>
         </div>
